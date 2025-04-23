@@ -24,19 +24,48 @@ namespace _00_TileCost_Calculator
             Double length = 0;
             Double costPerUnit = 0;
             Double area = 0;
+            String shape = "";
 
             // Welcome
             Console.WriteLine("Welcome to the Tile Cost Calculator!");
 
             // User input
             Console.WriteLine("This program will calculate how much it will cost to cover the area of a room with flooring.");
-            Console.Write("Please enter the width of the room in feet:");
-            width = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Please enter the length of the room in feet:");
-            length = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Please enter the cost per unit of flooring in dollars:");
+            Console.Write("Please enter the cost per unit of flooring in dollars: ");
             costPerUnit = Convert.ToDouble(Console.ReadLine());
-            area = width * length;
+            Console.WriteLine("Enter the shape of the room (Rectangle, Circle or Triangle): ");
+            shape = Console.ReadLine().ToLower();
+
+            // Make sure the user enters a valid shape
+            if (shape != "rectangle" && shape != "circle" && shape != "triangle")
+            {
+                Console.WriteLine("Invalid shape. Please enter either 'rectangle', 'circle' or 'triangle'.");
+                return;
+            }
+
+            // Shape it up
+            if (shape == "circle")
+            {
+                Console.Write("Please enter the radius of the room in feet: ");
+                width = Convert.ToDouble(Console.ReadLine());
+                area = Math.PI * Math.Pow(width, 2);
+            }
+            if (shape == "triangle")
+            {
+                Console.Write("Please enter the base of the room in feet: ");
+                width = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Please enter the height of the room in feet: ");
+                length = Convert.ToDouble(Console.ReadLine());
+                area = (width * length) / 2;
+            }
+            if (shape == "rectangle")
+            {
+                Console.Write("Please enter the width of the room in feet: ");
+                width = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Please enter the length of the room in feet: ");
+                length = Convert.ToDouble(Console.ReadLine());
+                area = width * length;
+            }
 
             // Calculate
             Console.WriteLine($"The area of the room is {area} square feet.");
